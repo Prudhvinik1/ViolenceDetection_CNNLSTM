@@ -90,8 +90,8 @@ def createDataset(datasets_video_path, figure_output_path,fix_len, force = False
 #     print(videos_frames_paths)
 #     print(videos_labels)
     train_path, test_path, train_y, test_y =  train_test_split(videos_frames_paths,videos_labels,train_size=0.8, random_state=42)
-
-#     if apply_aug:
+"""
+#    if apply_aug:
 #         aug_paths = []
 #         aug_y = []
 #         for train_path_, train_y_ in zip(train_path,train_y):
@@ -102,7 +102,7 @@ def createDataset(datasets_video_path, figure_output_path,fix_len, force = False
     
 #         train_path = train_path + aug_paths
 #         train_y = train_y + aug_y
-
+"""
     train_path, valid_path, train_y, valid_y = train_test_split(train_path, train_y, test_size=0.20, random_state=42)
     return train_path,valid_path, test_path,\
            train_y, valid_y, test_y,\
