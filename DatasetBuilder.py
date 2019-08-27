@@ -86,22 +86,20 @@ def createDataset(datasets_video_path, figure_output_path,fix_len, force = False
                 videos_labels.append(video_images['label'])
         datasets_images[dataset_name] = dataset_images
     avg_length = int(float(sum(videos_seq_length)) / max(len(videos_seq_length), 1))
-#     print("Printing Parameters")
-#     print(videos_frames_paths)
-#     print(videos_labels)
-    train_path, test_path, train_y, test_y =  train_test_split(videos_frames_paths,videos_labels,train_size=0.8, random_state=42)
 
-#    if apply_aug:
-#         aug_paths = []
-#         aug_y = []
-#         for train_path_, train_y_ in zip(train_path,train_y):
-    
-#             aug_path = generate_augmentations(train_path_,force = False)
-#             aug_paths.append(aug_path)
-#             aug_y.append(train_y_)
-    
-#         train_path = train_path + aug_paths
-#         train_y = train_y + aug_y
+    train_path, test_path, train_y, test_y =  train_test_split(videos_frames_paths,videos_labels, test_size=0.20, random_state=42)
+
+    # if apply_aug:
+    #     aug_paths = []
+    #     aug_y = []
+    #     for train_path_, train_y_ in zip(train_path,train_y):
+    #
+    #         aug_path = generate_augmentations(train_path_,force = False)
+    #         aug_paths.append(aug_path)
+    #         aug_y.append(train_y_)
+    #
+    #     train_path = train_path + aug_paths
+    #     train_y = train_y + aug_y
 
     train_path, valid_path, train_y, valid_y = train_test_split(train_path, train_y, test_size=0.20, random_state=42)
     return train_path,valid_path, test_path,\
@@ -125,7 +123,6 @@ def frame_loader(frames,figure_shape,to_norm = True):
 
 
 def data_generator(data_paths,labels,batch_size,figure_shape,seq_length,use_aug,use_crop,crop_x_y,classes = 1):
-    use_aug = False
     while True:
         indexes = np.arange(len(data_paths))
         np.random.shuffle(indexes)
