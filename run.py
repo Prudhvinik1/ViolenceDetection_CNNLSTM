@@ -184,13 +184,13 @@ def hyper_tune_network(dataset_name, epochs, batch_size, batch_epoch_ratio, figu
 
 # static parameter for the netwotk
 datasets_videos = dict(
-    hocky=dict(hocky="data/raw_videos/HockeyFights"),
-    violentflow=dict(violentflow="data/raw_videos/violentflow"),
+    #hocky=dict(hocky="data/raw_videos/HockeyFights"),
+    #violentflow=dict(violentflow="data/raw_videos/violentflow"),
     movies=dict(movies="data/raw_videos/movies")
 )
 
 crop_dark = dict(
-    hocky=(11, 38),
+    #hocky=(11, 38),
     violentflow=None,
     movies=None
 )
