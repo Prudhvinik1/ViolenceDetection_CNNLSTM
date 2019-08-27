@@ -195,7 +195,7 @@ crop_dark = dict(
     movies=None
 )
 
-datasets_frames = "data/raw_frames"
+datasets_frames = "/content/drive/My Drive/ConvLSTM_violence/data/raw_frames"
 res_path = "/content/drive/My Drive/ConvLSTM_violence/results"
 figure_size = 244
 # split_ratio = 0.1
