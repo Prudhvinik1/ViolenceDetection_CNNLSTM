@@ -186,7 +186,7 @@ def hyper_tune_network(dataset_name, epochs, batch_size, batch_epoch_ratio, figu
 datasets_videos = dict(
     #hocky=dict(hocky="data/raw_videos/HockeyFights"),
     #violentflow=dict(violentflow="data/raw_videos/violentflow"),
-    movies=dict(movies="data/raw_videos/movies")
+    movies=dict(movies="/content/drive/My Drive/ConvLSTM_violence/data/raw_videos/movies")
 )
 
 crop_dark = dict(
