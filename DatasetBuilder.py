@@ -125,6 +125,7 @@ def frame_loader(frames,figure_shape,to_norm = True):
 
 
 def data_generator(data_paths,labels,batch_size,figure_shape,seq_length,use_aug,use_crop,crop_x_y,classes = 1):
+    use_aug = False
     while True:
         indexes = np.arange(len(data_paths))
         np.random.shuffle(indexes)
