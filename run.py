@@ -212,7 +212,7 @@ classes = 1
 cnns_arch = dict(ResNet50=ResNet50, InceptionV3=InceptionV3, VGG19=VGG19)  #
 learning_rates = [1e-4, 1e-3]
 #use_augs = [True, False, ]
-use_augs = False
+use_augs = [False,False]
 fix_lens = [20, 10]
 optimizers = [(RMSprop, {}), (Adam, {})]
 dropouts = [0.0, 0.5]
