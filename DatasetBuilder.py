@@ -87,7 +87,7 @@ def createDataset(datasets_video_path, figure_output_path,fix_len, force = False
         datasets_images[dataset_name] = dataset_images
     avg_length = int(float(sum(videos_seq_length)) / max(len(videos_seq_length), 1))
 
-    train_path, test_path, train_y, test_y =  train_test_split(videos_frames_paths,videos_labels,train_size=0.8, test_size=0.20, random_state=42)
+    train_path, test_path, train_y, test_y =  train_test_split(videos_frames_paths,videos_labels,train_size=0.8, random_state=42)
 
     if apply_aug:
         aug_paths = []
