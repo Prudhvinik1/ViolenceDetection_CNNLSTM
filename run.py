@@ -185,9 +185,9 @@ def hyper_tune_network(dataset_name, epochs, batch_size, batch_epoch_ratio, figu
 # static parameter for the netwotk
 datasets_videos = dict(
     #hocky=dict(hocky="data/raw_videos/HockeyFights"),
-    #violentflow=dict(violentflow="data/raw_videos/violentflow"),
+    violentflow=dict(violentflow="/content/drive/My Drive/ConvLSTM_violence/data/raw_videos/violentflow"),
     #movies=dict(movies="/content/drive/My Drive/ConvLSTM_violence/data/raw_videos/movies")
-    crimes=dict(crimes="/content/drive/My Drive/UCF-Anomaly-Detection-Dataset")
+    #crimes=dict(crimes="/content/drive/My Drive/UCF-Anomaly-Detection-Dataset")
 )
 
 crop_dark = dict(
@@ -198,7 +198,7 @@ crop_dark = dict(
 )
 
 datasets_frames = "/content/drive/My Drive/ConvLSTM_violence/data/raw_frames"
-res_path = "/content/drive/My Drive/ConvLSTM_violence/results/crimes_results"
+res_path = "/content/drive/My Drive/ConvLSTM_violence/results/violentflows_results"
 figure_size = 244
 # split_ratio = 0.1
 batch_size = 2
@@ -225,7 +225,7 @@ apply_hyper = True
 if apply_hyper:
     # the hyper tunning symulate the architechture behavior
     # we set the batch_epoch_ratio - reduced by X to have the hypertunning faster with epoches shorter
-    hyper, results = hyper_tune_network(dataset_name='crimes', epochs=30,
+    hyper, results = hyper_tune_network(dataset_name='violentflow', epochs=30,
                                         batch_size=batch_size, batch_epoch_ratio=1, figure_size=figure_size,
                                         initial_weights=initial_weights, lstm=lstm,
                                         cnns_arch=cnns_arch, learning_rates=learning_rates,
