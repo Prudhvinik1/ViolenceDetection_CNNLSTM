@@ -14,7 +14,7 @@ from numpy.random import seed, shuffle
 
 from tensorflow import set_random_seed
 from collections import defaultdict
-
+import plotHistory
 
 class TestCallback(Callback):
     def __init__(self, test_data):
@@ -262,6 +262,7 @@ for dataset_name, dataset_videos in datasets_videos.items():
                                 optimizer=optimizer, cnn_train_type=cnn_train_type,
                                 pre_weights=weights, lstm_conf=lstm, len_train=len_train, len_valid=len_valid,
                                 dropout=dropout, classes=classes)
+    plot_and_save_history(result, cnn_arch,res_path + '/' + cnn_arch + dataset_name + epochs + '--history.png')
     results.append(result)
     pd.DataFrame(results).to_csv("results_datasets.csv")
     print(result)
