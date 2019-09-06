@@ -78,6 +78,10 @@ def createDataset(datasets_video_path, figure_output_path,fix_len, force = False
                     elif dataset_name == "movies":
                         if "fi" in filename:
                             video_images['label'] = 1
+                    elif dataset_name == "crimes":
+                        if "Normal" not in filename:
+                            video_images['label'] = 1
+                            
                     with open(video_images_file, 'wb') as f:
                         pickle.dump(video_images, f, pickle.HIGHEST_PROTOCOL)
                 dataset_images.append(video_images)
