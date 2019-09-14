@@ -1,4 +1,4 @@
-import os
+`import os
 from itertools import chain
 
 from keras.callbacks import EarlyStopping, ReduceLROnPlateau, Callback
@@ -231,7 +231,7 @@ if apply_hyper:
                                         cnns_arch=cnns_arch, learning_rates=learning_rates,
                                         optimizers=optimizers, cnn_train_types=cnn_train_types, dropouts=dropouts,
                                         classes=classes, use_augs=use_augs, fix_lens=fix_lens)
-
+    plot_and_save_history(results, cnns_arch,res_path + '/' + cnn_arch + dataset_name + epochs + '--history.png')
     pd.DataFrame(results).to_csv("results_hyper.csv")
     cnn_arch, learning_rate, optimizer, cnn_train_type, dropout, use_aug, fix_len = hyper['cnn_arch'], \
                                                                                     hyper['learning_rate'], \
