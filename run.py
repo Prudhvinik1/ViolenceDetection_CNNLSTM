@@ -232,7 +232,7 @@ if apply_hyper:
                                         optimizers=optimizers, cnn_train_types=cnn_train_types, dropouts=dropouts,
                                         classes=classes, use_augs=use_augs, fix_lens=fix_lens)
     plot_and_save_history(results, cnns_arch,res_path + '/' + cnn_arch + dataset_name + epochs + '--history.png')
-    pd.DataFrame(results).to_csv("results_hyper.csv")
+    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/hockyresults_hyper.csv")
     cnn_arch, learning_rate, optimizer, cnn_train_type, dropout, use_aug, fix_len = hyper['cnn_arch'], \
                                                                                     hyper['learning_rate'], \
                                                                                     hyper['optimizer'], \
@@ -264,6 +264,6 @@ for dataset_name, dataset_videos in datasets_videos.items():
                                 dropout=dropout, classes=classes)
     plot_and_save_history(result, cnn_arch,res_path + '/' + cnn_arch + dataset_name + epochs + '--history.png')
     results.append(result)
-    pd.DataFrame(results).to_csv("results_datasets.csv")
+    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/hockyresults_datasets.csv")
     print(result)
-pd.DataFrame(results).to_csv("results.csv")
+pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/hockyresults.csv")
