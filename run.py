@@ -187,7 +187,7 @@ datasets_videos = dict(
     hocky=dict(hocky="/content/drive/My Drive/ConvLSTM_violence/data/raw_videos/hocky"),
     violentflow=dict(violentflow="/content/drive/My Drive/ConvLSTM_violence/data/raw_videos/violentflow"),
     movies=dict(movies="/content/drive/My Drive/ConvLSTM_violence/data/raw_videos/movies"),
-    crimes=dict(crimes="/content/drive/My Drive/UCF-Anomaly-Detection-Dataset")
+    crimes=dict(crimes="/content/drive/My Drive/ConvLSTM_violence/data/raw_videos/crimes")
 )
 
 crop_dark = dict(
