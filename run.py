@@ -185,9 +185,9 @@ def hyper_tune_network(dataset_name, epochs, batch_size, batch_epoch_ratio, figu
 
 # static parameter for the netwotk
 datasets_videos = dict(
-    hocky=dict(hocky="/content/drive/My Drive/ConvLSTM_violence/data/raw_videos/hocky"),
-    violentflow=dict(violentflow="/content/drive/My Drive/ConvLSTM_violence/data/raw_videos/violentflow"),
-    movies=dict(movies="/content/drive/My Drive/ConvLSTM_violence/data/raw_videos/movies"),
+    #hocky=dict(hocky="/content/drive/My Drive/ConvLSTM_violence/data/raw_videos/hocky"),
+    #violentflow=dict(violentflow="/content/drive/My Drive/ConvLSTM_violence/data/raw_videos/violentflow"),
+    #movies=dict(movies="/content/drive/My Drive/ConvLSTM_violence/data/raw_videos/movies"),
     crimes=dict(crimes="/content/drive/My Drive/ConvLSTM_violence/data/raw_videos/crimes")
 )
 
@@ -197,6 +197,7 @@ crop_dark = dict(
     movies=None,
     crimes=None
 )
+
 
 datasets_frames = "/content/drive/My Drive/ConvLSTM_violence/data/raw_frames"
 res_path = "/content/drive/My Drive/ConvLSTM_violence/results/crimes_results"
@@ -234,7 +235,7 @@ if apply_hyper:
                                         optimizers=optimizers, cnn_train_types=cnn_train_types, dropouts=dropouts,
                                         classes=classes, use_augs=use_augs, fix_lens=fix_lens)
     plot_and_save_history(results, cnns_arch,res_path + '/' + cnn_arch + dataset_name + epochs + '--history.png')
-    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/moviesresults_hyper_pru.csv")
+    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_hyper_pru.csv")
     cnn_arch, learning_rate, optimizer, cnn_train_type, dropout, use_aug, fix_len = hyper['cnn_arch'], \
                                                                                     hyper['learning_rate'], \
                                                                                     hyper['optimizer'], \
@@ -266,6 +267,6 @@ for dataset_name, dataset_videos in datasets_videos.items():
                                 dropout=dropout, classes=classes)
     plotHistory.plot_and_save_history(result, cnn_arch,res_path + '/' + cnn_arch + dataset_name + epochs + '--history.png')
     results.append(result)
-    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/moviesresults_datasets_pru.csv")
+    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_datasets_pru.csv")
     print(result)
-pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/moviesresults_pru.csv")
+pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_pru.csv")
