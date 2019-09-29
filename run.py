@@ -37,6 +37,7 @@ def train_eval_network(dataset_name, train_gen, validate_gen, test_x, test_y, se
     """the function build, compine fit and evaluate a certain architechtures on a dataset"""
     set_random_seed(2)
     seed(1)
+    print("Experiment Runnning with CNN:",str(cnn_arch))
     result = dict(dataset=dataset_name, cnn_train=cnn_train_type,
                   cnn=cnn_arch.__name__, lstm=lstm_conf[0].__name__, epochs=epochs,
                   learning_rate=learning_rate, batch_size=batch_size, dropout=dropout,
@@ -211,8 +212,8 @@ lstm = (ConvLSTM2D, dict(filters=256, kernel_size=(3, 3), padding='same', return
 classes = 1
 
 # hyper parameters for tunning the network
-#cnns_arch = dict(ResNet50=ResNet50, InceptionV3=InceptionV3, VGG19=VGG19)  #
-cnns_arch = dict(ResNet50=ResNet50)
+cnns_arch = dict(ResNet50=ResNet50, InceptionV3=InceptionV3, VGG19=VGG19)  #
+#cnns_arch = dict(ResNet50=ResNet50)
 learning_rates = [1e-4, 1e-3]
 #use_augs = [True, False, ]
 use_augs = [False,False]
@@ -226,14 +227,14 @@ apply_hyper = True
 if apply_hyper:
     # the hyper tunning symulate the architechture behavior
     # we set the batch_epoch_ratio - reduced by X to have the hypertunning faster with epoches shorter
-    hyper, results = hyper_tune_network(dataset_name='crimes', epochs=30,
+    hyper, results = hyper_tune_network(dataset_name='crimes', epochs=2,
                                         batch_size=batch_size, batch_epoch_ratio=1, figure_size=figure_size,
                                         initial_weights=initial_weights, lstm=lstm,
                                         cnns_arch=cnns_arch, learning_rates=learning_rates,
                                         optimizers=optimizers, cnn_train_types=cnn_train_types, dropouts=dropouts,
                                         classes=classes, use_augs=use_augs, fix_lens=fix_lens)
     plot_and_save_history(results, cnns_arch,res_path + '/' + cnn_arch + dataset_name + epochs + '--history.png')
-    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_hyper_pru.csv")
+    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/moviesresults_hyper_pru.csv")
     cnn_arch, learning_rate, optimizer, cnn_train_type, dropout, use_aug, fix_len = hyper['cnn_arch'], \
                                                                                     hyper['learning_rate'], \
                                                                                     hyper['optimizer'], \
@@ -256,7 +257,7 @@ for dataset_name, dataset_videos in datasets_videos.items():
                                                                                             use_aug=use_aug,
                                                                                             use_crop=True,
                                                                                             crop_dark=crop_dark)
-    result = train_eval_network(epochs=50, dataset_name=dataset_name, train_gen=train_gen, validate_gen=validate_gen,
+    result = train_eval_network(epochs=2, dataset_name=dataset_name, train_gen=train_gen, validate_gen=validate_gen,
                                 test_x=test_x, test_y=test_y, seq_len=seq_len, batch_size=batch_size,
                                 batch_epoch_ratio=0.5, initial_weights=initial_weights, size=figure_size,
                                 cnn_arch=cnn_arch, learning_rate=learning_rate,
@@ -265,6 +266,6 @@ for dataset_name, dataset_videos in datasets_videos.items():
                                 dropout=dropout, classes=classes)
     plotHistory.plot_and_save_history(result, cnn_arch,res_path + '/' + cnn_arch + dataset_name + epochs + '--history.png')
     results.append(result)
-    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_datasets_pru.csv")
+    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/moviesresults_datasets_pru.csv")
     print(result)
-pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_pru.csv")
+pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/moviesresults_pru.csv")
