@@ -62,7 +62,7 @@ def createDataset(datasets_video_path, figure_output_path,fix_len, force = False
             os.makedirs(dataset_figures_path)
         dataset_images = []
         for filename in os.listdir(dataset_video_path):
-            if filename.endswith(".avi") or filename.endswith(".mpg"):
+            if filename.endswith(".avi") or filename.endswith(".mpg") or filename.endswith(".mp4"):
                 video_images_file = os.path.join(dataset_figures_path,filename[:-4], 'video_summary.pkl')
                 if os.path.isfile(video_images_file) and not force:
                     with open(video_images_file, 'rb') as f:
