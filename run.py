@@ -200,7 +200,7 @@ crop_dark = dict(
 
 
 datasets_frames = "/content/drive/My Drive/ConvLSTM_violence/data/raw_frames"
-res_path = "/content/drive/My Drive/ConvLSTM_violence/results/crimes_results"
+res_path = "/content/drive/My Drive/ConvLSTM_violence/results/crime_results"
 figure_size = 244
 # split_ratio = 0.1
 batch_size = 2
@@ -213,8 +213,8 @@ lstm = (ConvLSTM2D, dict(filters=256, kernel_size=(3, 3), padding='same', return
 classes = 1
 
 # hyper parameters for tunning the network
-cnns_arch = dict(ResNet50=ResNet50, InceptionV3=InceptionV3, VGG19=VGG19)  #
-#cnns_arch = dict(ResNet50=ResNet50)
+#cnns_arch = dict(ResNet50=ResNet50, InceptionV3=InceptionV3, VGG19=VGG19)  #
+cnns_arch = dict(ResNet50=ResNet50)
 learning_rates = [1e-4, 1e-3]
 #use_augs = [True, False, ]
 use_augs = [False,False]
