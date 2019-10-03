@@ -228,13 +228,13 @@ apply_hyper = True
 if apply_hyper:
     # the hyper tunning symulate the architechture behavior
     # we set the batch_epoch_ratio - reduced by X to have the hypertunning faster with epoches shorter
-    hyper, results = hyper_tune_network(dataset_name='crimes', epochs=2,
+    hyper, results = hyper_tune_network(dataset_name='crimes', epochs=30,
                                         batch_size=batch_size, batch_epoch_ratio=1, figure_size=figure_size,
                                         initial_weights=initial_weights, lstm=lstm,
                                         cnns_arch=cnns_arch, learning_rates=learning_rates,
                                         optimizers=optimizers, cnn_train_types=cnn_train_types, dropouts=dropouts,
                                         classes=classes, use_augs=use_augs, fix_lens=fix_lens)
-    plot_and_save_history(results, cnns_arch,res_path + '/' + cnn_arch + dataset_name + epochs + '--history.png')
+    plotHistory.plot_and_save_history(results, cnns_arch,res_path + '/' + cnn_arch + dataset_name + epochs + '--history.png')
     pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_hyper_pru.csv")
     cnn_arch, learning_rate, optimizer, cnn_train_type, dropout, use_aug, fix_len = hyper['cnn_arch'], \
                                                                                     hyper['learning_rate'], \
@@ -258,7 +258,7 @@ for dataset_name, dataset_videos in datasets_videos.items():
                                                                                             use_aug=use_aug,
                                                                                             use_crop=True,
                                                                                             crop_dark=crop_dark)
-    result = train_eval_network(epochs=2, dataset_name=dataset_name, train_gen=train_gen, validate_gen=validate_gen,
+    result = train_eval_network(epochs=50, dataset_name=dataset_name, train_gen=train_gen, validate_gen=validate_gen,
                                 test_x=test_x, test_y=test_y, seq_len=seq_len, batch_size=batch_size,
                                 batch_epoch_ratio=0.5, initial_weights=initial_weights, size=figure_size,
                                 cnn_arch=cnn_arch, learning_rate=learning_rate,
