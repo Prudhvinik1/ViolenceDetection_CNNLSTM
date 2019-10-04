@@ -208,7 +208,7 @@ batch_size = 2
 fix_len = 20
 initial_weights = 'glorot_uniform'
 weights = 'imagenet'
-force = True
+force = Falsee
 lstm = (ConvLSTM2D, dict(filters=256, kernel_size=(3, 3), padding='same', return_sequences=False))
 classes = 1
 
@@ -235,7 +235,7 @@ if apply_hyper:
                                         optimizers=optimizers, cnn_train_types=cnn_train_types, dropouts=dropouts,
                                         classes=classes, use_augs=use_augs, fix_lens=fix_lens)
     plotHistory.plot_and_save_history(results, cnns_arch,res_path + '/' + cnn_arch + dataset_name + epochs + '--history.png')
-    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_hyper_pru.csv")
+    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_hyper_pru_resnet50.csv")
     cnn_arch, learning_rate, optimizer, cnn_train_type, dropout, use_aug, fix_len = hyper['cnn_arch'], \
                                                                                     hyper['learning_rate'], \
                                                                                     hyper['optimizer'], \
@@ -267,6 +267,6 @@ for dataset_name, dataset_videos in datasets_videos.items():
                                 dropout=dropout, classes=classes)
     plotHistory.plot_and_save_history(result, cnn_arch,res_path + '/' + cnn_arch + dataset_name + epochs + '--history.png')
     results.append(result)
-    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_datasets_pru.csv")
+    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_datasets_pru_resnet50.csv")
     print(result)
-pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_pru.csv")
+pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_pru_resnet50.csv")
