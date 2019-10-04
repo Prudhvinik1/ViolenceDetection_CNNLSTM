@@ -214,7 +214,8 @@ classes = 1
 
 # hyper parameters for tunning the network
 #cnns_arch = dict(ResNet50=ResNet50, InceptionV3=InceptionV3, VGG19=VGG19)  #
-cnns_arch = dict(ResNet50=ResNet50)
+#cnns_arch = dict(ResNet50=ResNet50)
+cnn_archs = dict(DenseNet121=DenseNet121)
 learning_rates = [1e-4, 1e-3]
 #use_augs = [True, False, ]
 use_augs = [False,False]
@@ -223,7 +224,7 @@ optimizers = [(RMSprop, {}), (Adam, {})]
 dropouts = [0.3, 0.5]
 cnn_train_types = ['retrain', 'static']
 
-apply_hyper = True
+apply_hyper = False
 
 if apply_hyper:
     # the hyper tunning symulate the architechture behavior
@@ -244,8 +245,8 @@ if apply_hyper:
                                                                                     hyper['seq_len'],
 else:
     results = []
-    cnn_arch, learning_rate, optimizer, cnn_train_type, dropout, use_aug, fix_len = ResNet50, 0.0001, (
-    RMSprop, {}), 'retrain', 0.0, True, 20
+    cnn_arch, learning_rate, optimizer, cnn_train_type, dropout, use_aug, fix_len = DenseNet121, 0.0001, (
+    Adam, {}), 'retrain', 0.3, False, 20
 
 # apply best architechture on all datasets with more epochs
 for dataset_name, dataset_videos in datasets_videos.items():
@@ -267,6 +268,6 @@ for dataset_name, dataset_videos in datasets_videos.items():
                                 dropout=dropout, classes=classes)
     plotHistory.plot_and_save_history(result, cnn_arch,res_path + '/' + cnn_arch + dataset_name + epochs + '--history.png')
     results.append(result)
-    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_datasets_pru_resnet50.csv")
+    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_datasets_pru_DEnsenet121.csv")
     print(result)
-pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_pru_resnet50.csv")
+pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_pru_Densenet121.csv")
