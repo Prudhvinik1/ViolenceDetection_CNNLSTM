@@ -50,7 +50,7 @@ def save_figures_from_video(dataset_video_path, video_filename, suffix,figures_p
 
     return video_images
 
-def createDataset(datasets_video_path, figure_output_path,fix_len, force = False,classes):
+def createDataset(datasets_video_path, figure_output_path,fix_len,classes, force = False):
     videos_seq_length = []
     datasets_images = {}
     videos_frames_paths = []
