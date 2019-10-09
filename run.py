@@ -96,7 +96,7 @@ def get_generators(dataset_name, dataset_videos, datasets_frames, fix_len, figur
                    use_crop=True, crop_dark=None):
     train_path, valid_path, test_path, \
     train_y, valid_y, test_y, \
-    avg_length = DatasetBuilder.createDataset(dataset_videos, datasets_frames, fix_len, force=force,classes)
+    avg_length = DatasetBuilder.createDataset(dataset_videos, datasets_frames, fix_len,classes, force=force)
 
     if fix_len is not None:
         avg_length = fix_len
