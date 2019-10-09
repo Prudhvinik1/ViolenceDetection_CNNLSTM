@@ -50,7 +50,7 @@ def save_figures_from_video(dataset_video_path, video_filename, suffix,figures_p
 
     return video_images
 
-def createDataset(datasets_video_path, figure_output_path,fix_len, force = False):
+def createDataset(datasets_video_path, figure_output_path,fix_len, force = False,classes):
     videos_seq_length = []
     datasets_images = {}
     videos_frames_paths = []
@@ -79,8 +79,40 @@ def createDataset(datasets_video_path, figure_output_path,fix_len, force = False
                         if "fi" in filename:
                             video_images['label'] = 1
                     elif dataset_name == "crimes":
-                        if "Normal" not in filename:
-                            video_images['label'] = 1
+                        if classes == 1:
+                            if "Normal" not in filename:
+                                video_images['label'] = 1
+                        elif classes == 14:
+                            if "Abuse" in filename:
+                                video_images['label'] = 0
+                            elif "Arrest" in filename:
+                                video_images['label'] = 1
+                            elif "Arson" in filename:
+                                video_images['label'] = 2
+                            elif "Assault" in filename:
+                                video_images['label'] = 3
+                            elif "Burglary" in filename:
+                                video_images['label'] = 4
+                            elif "Explosion" in filename:
+                                video_images['label'] = 5
+                            elif "Fighting" in filename:
+                                video_images['label'] = 6
+                            elif "Normal" in filename:
+                                video_images['label'] = 7
+                            elif "RoadAccidents" in filename:
+                                video_images['label'] = 8
+                            elif "Robbery" in filename:
+                                video_images['label'] = 9
+                            elif "Shooting" in filename:
+                                video_images['label'] = 10
+                            elif "Shoplifting" in filename:
+                                video_images['label'] = 11
+                            elif "Stealing" in filename:
+                                video_images['label'] = 12
+                            elif "Vandalism" in filename:
+                                video_images['label'] = 13
+                            
+                            
                             
                     with open(video_images_file, 'wb') as f:
                         pickle.dump(video_images, f, pickle.HIGHEST_PROTOCOL)
