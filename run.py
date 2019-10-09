@@ -200,7 +200,7 @@ crop_dark = dict(
 
 
 datasets_frames = "/content/drive/My Drive/ConvLSTM_violence/data/raw_frames"
-res_path = "/content/drive/My Drive/ConvLSTM_violence/results/crime_results"
+res_path = "/content/drive/My Drive/ConvLSTM_violence/results/crimes_multi_results"
 figure_size = 244
 # split_ratio = 0.1
 batch_size = 2
@@ -210,7 +210,7 @@ initial_weights = 'glorot_uniform'
 weights = 'imagenet'
 force = False
 lstm = (ConvLSTM2D, dict(filters=256, kernel_size=(3, 3), padding='same', return_sequences=False))
-classes = 1
+classes = 14
 
 # hyper parameters for tunning the network
 #cnns_arch = dict(ResNet50=ResNet50, InceptionV3=InceptionV3, VGG19=VGG19)  #
@@ -245,8 +245,8 @@ if apply_hyper:
                                                                                     hyper['seq_len'],
 else:
     results = []
-    cnn_arch, learning_rate, optimizer, cnn_train_type, dropout, use_aug, fix_len = DenseNet121, 0.0001, (
-    RMSprop, {}), 'retrain', 0.3, False, 20
+    cnn_arch, learning_rate, optimizer, cnn_train_type, dropout, use_aug, fix_len = ResNet50, 0.0001, (
+    Adam, {}), 'retrain', 0.3, False, 20
 
 # apply best architechture on all datasets with more epochs
 for dataset_name, dataset_videos in datasets_videos.items():
@@ -259,7 +259,7 @@ for dataset_name, dataset_videos in datasets_videos.items():
                                                                                             use_aug=use_aug,
                                                                                             use_crop=True,
                                                                                             crop_dark=crop_dark)
-    result = train_eval_network(epochs=50, dataset_name=dataset_name, train_gen=train_gen, validate_gen=validate_gen,
+    result = train_eval_network(epochs=30, dataset_name=dataset_name, train_gen=train_gen, validate_gen=validate_gen,
                                 test_x=test_x, test_y=test_y, seq_len=seq_len, batch_size=batch_size,
                                 batch_epoch_ratio=0.5, initial_weights=initial_weights, size=figure_size,
                                 cnn_arch=cnn_arch, learning_rate=learning_rate,
@@ -268,6 +268,6 @@ for dataset_name, dataset_videos in datasets_videos.items():
                                 dropout=dropout, classes=classes)
     plotHistory.plot_and_save_history(result, cnn_arch,res_path + '/' + cnn_arch + dataset_name + epochs + '--history.png')
     results.append(result)
-    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_datasets_pru_RMSprop_DEnsenet121.csv")
+    pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimes_multi_results_Adam_Resnet50.csv")
     print(result)
-pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimesresults_pru_RMSprop_Densenet121.csv")
+pd.DataFrame(results).to_csv("/content/drive/My Drive/ConvLSTM_violence/Exp Results/crimes_multi_results_Adam_Resnet50.csv")
