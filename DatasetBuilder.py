@@ -258,6 +258,11 @@ def get_sequences(data_paths,labels,figure_shape,seq_length,classes=1, use_augme
         X.append(x)
         y.append(label)
     X = pad_sequences(X, maxlen=seq_length, padding='pre', truncating='pre')
+    print("Printing X")
+    print(X)
+    print("Printing Y")
+    print(y)
+    print("Error Arraises Here")
     if classes > 1:
         x_ = to_categorical(x_,classes)
     return np.array(X), np.array(y)
